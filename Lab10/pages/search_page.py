@@ -1,26 +1,9 @@
-"""
-Page Object класс для работы с поиском товаров.
-
-Этот класс инкапсулирует логику работы с поиском на сайте:
-- Выполнение поисковых запросов
-- Получение результатов поиска
-- Проверка наличия результатов
-"""
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class SearchPage:
-    """
-    Класс для работы с поиском товаров на AutomationExercise.com.
-    
-    Основные функции:
-    - Выполнение поиска по запросу
-    - Получение заголовка результатов
-    - Подсчет количества результатов
-    - Проверка наличия результатов
-    """
+
     SEARCH_INPUT = (By.CSS_SELECTOR, "input#search_product, input[name='search']")
     SEARCH_BUTTON = (By.CSS_SELECTOR, "button#submit_search, button[type='submit']")
     SEARCH_RESULTS_TITLE = (By.CSS_SELECTOR, "h2.title.text-center, h2.text-center")
@@ -33,23 +16,20 @@ class SearchPage:
         self.driver.get(base_url)
 
     def search(self, query):
-        # Поле поиска может быть на странице Products
-        # Сначала проверяем, есть ли оно на текущей странице
         try:
             search_input = WebDriverWait(self.driver, 5).until(
                 EC.presence_of_element_located(self.SEARCH_INPUT)
             )
         except:
-            # Если не найдено, переходим на страницу Products
             products_link = self.driver.find_element(By.CSS_SELECTOR, "a[href='/products']")
             products_link.click()
             search_input = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located(self.SEARCH_INPUT)
             )
-        
+
         search_input.clear()
         search_input.send_keys(query)
-        
+
         search_button = self.driver.find_element(*self.SEARCH_BUTTON)
         search_button.click()
 

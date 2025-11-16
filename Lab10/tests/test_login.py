@@ -1,27 +1,9 @@
-"""
-Тесты для проверки функциональности авторизации на сайте AutomationExercise.com.
-
-Содержит тесты:
-- Успешная авторизация с валидными данными
-- Авторизация с неверными данными (проверка обработки ошибок)
-"""
-
 import pytest
 import json
 from pages.login_page import LoginPage
 
-# Команда для запуска: pytest tests/test_login.py -v
 
 def load_test_data():
-    """
-    Загружает тестовые данные из JSON конфигурационного файла.
-    
-    Returns:
-        dict: Словарь с тестовыми данными (URL, учетные данные, ожидаемые сообщения)
-    
-    Note:
-        Используется encoding='utf-8' для корректной работы с кириллицей в комментариях JSON.
-    """
     with open("config/test_login.json", encoding='utf-8') as f:
         return json.load(f)
 
@@ -38,25 +20,18 @@ def test_login(driver):
     data = load_test_data()
     page = LoginPage(driver)
 
-    # Шаг 1: Открыть главную страницу
     page.open(data["url"])
-    
-    # Шаг 2: Перейти на страницу входа
+
     page.open_login_page()
-    
-    # Шаг 3: Ввести логин и пароль
+
     page.login(data["valid_credentials"]["email"], data["valid_credentials"]["password"])
 
-    # Шаг 4: Проверить успешный вход
     success_text = page.get_success_message()
     assert success_text is not None, "Сообщение об успешном входе не найдено"
-    
-    # Проверяем, что пользователь авторизован (наличие ссылки Logout или текста "Logged in as")
+
     assert page.is_logged_in(), "Пользователь не авторизован"
-    
-    # Проверяем наличие ожидаемого сообщения (может быть в полном тексте или просто наличие Logout)
+
     if success_text and data["expected_success_message"] not in success_text:
-        # Если не нашли полный текст, но есть ссылка Logout - это тоже успех
         assert "Logout" in success_text or page.is_logged_in(), \
             f"Ожидалось сообщение содержащее '{data['expected_success_message']}' или наличие ссылки Logout, получено: '{success_text}'"
 
