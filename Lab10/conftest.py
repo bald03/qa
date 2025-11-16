@@ -1,54 +1,84 @@
+"""
+Конфигурационный файл pytest (conftest.py)
+
+Этот файл содержит общие настройки и фикстуры для всех тестов.
+Фикстуры - это функции, которые выполняются до и после тестов.
+
+Настроен для работы с Selenium Grid через RemoteWebDriver.
+"""
+
 import pytest
 from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
-def pytest_addoption(parser):
-    parser.addoption(
-        "--browser",
-        action="store",
-        default="chrome",
-        help="Выбор браузера: chrome или firefox",
-        choices=["chrome", "firefox"]
-    )
+# URL Selenium Hub
+SELENIUM_HUB_URL = "http://localhost:4444/wd/hub"
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="function", params=["chrome", "firefox"])
 def driver(request):
-    browser = request.config.getoption("--browser")
+    """
+    Фикстура для создания и управления веб-драйвером Selenium через RemoteWebDriver.
     
-    hub_url = "http://localhost:4444/wd/hub"
+    Scope "function" означает, что драйвер создается заново для каждого теста.
+    Это обеспечивает изоляцию тестов друг от друга.
     
-    if browser == "chrome":
-        options = webdriver.ChromeOptions()
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-software-rasterizer")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--start-maximized")
-        options.add_argument("--window-size=1920,1080")
-    elif browser == "firefox":
-        options = webdriver.FirefoxOptions()
-        options.add_argument("--no-sandbox")
-        options.set_preference("dom.disable_beforeunload", True)
-    else:
-        raise ValueError(f"Неподдерживаемый браузер: {browser}")
+    Параметр params=["chrome", "firefox"] обеспечивает запуск каждого теста
+    в обоих браузерах.
     
-    driver = webdriver.Remote(
-        command_executor=hub_url,
-        options=options,
-        keep_alive=True
-    )
+    Процесс работы:
+    1. Создается RemoteWebDriver, подключенный к Selenium Grid Hub
+    2. Выбирается браузер на основе параметра (chrome или firefox)
+    3. Окно браузера максимизируется
+    4. Драйвер передается в тест через параметр driver
+    5. После завершения теста браузер закрывается (driver.quit())
     
-    driver.implicitly_wait(10)  # Неявное ожидание элементов
-    driver.set_page_load_timeout(60)  # Таймаут загрузки страницы
-    driver.set_script_timeout(60)  # Таймаут выполнения скриптов
+    Args:
+        request: Объект pytest request для доступа к параметрам фикстуры
+    
+    Returns:
+        WebDriver: Экземпляр RemoteWebDriver для управления браузером
+    """
+    browser = request.param
+    driver = None
     
     try:
+        if browser == "chrome":
+            # Настройка опций для Chrome
+            options = ChromeOptions()
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--window-size=1920,1080")
+            
+            # Создаем RemoteWebDriver для Chrome
+            driver = webdriver.Remote(
+                command_executor=SELENIUM_HUB_URL,
+                options=options
+            )
+            
+        elif browser == "firefox":
+            # Настройка опций для Firefox
+            options = FirefoxOptions()
+            # Для Firefox в Docker обычно не требуются дополнительные аргументы
+            # maximize_window() будет вызван ниже
+            
+            # Создаем RemoteWebDriver для Firefox
+            driver = webdriver.Remote(
+                command_executor=SELENIUM_HUB_URL,
+                options=options
+            )
+        
+        # Максимизируем окно браузера для лучшей видимости элементов
         driver.maximize_window()
-    except Exception:
-        driver.set_window_size(1920, 1080)
-    
-    yield driver
-    
-    driver.quit()
+        
+        # yield передает управление тесту, после завершения теста выполнится код после yield
+        yield driver
+        
+    finally:
+        # Закрываем браузер после завершения теста
+        if driver:
+            driver.quit()
