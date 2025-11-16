@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^\\d+$"
+    },
+    "category_id": {
+      "type": "string",
+      "pattern": "^([1-9]|1[0-5])$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alias": {
+      "type": "string"
+    },
+    "content": {
+      "type": ["string", "null"]
+    },
+    "price": {
+      "type": "string",
+      "pattern": "^\\d+(.\\d+)?$"
+    },
+    "old_price": {
+      "type": ["string", "null"],
+      "pattern": "^\\d+(.\\d+)?$"
+    },
+    "status": {
+      "type": "string",
+      "pattern": "^[01]$"
+    },
+    "keywords": {
+      "type": ["string", "null"]
+    },
+    "description": {
+      "type": ["string", "null"]
+    },
+    "hit": {
+      "type": "string",
+      "pattern": "^[01]$"
+    }
+  },
+  "required": [
+    "id",
+    "category_id",
+    "title",
+    "alias",
+    "content",
+    "price",
+    "status",
+    "keywords",
+    "description",
+    "hit"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,28 @@
+{
+  "url": "https://automationexercise.com/",
+  "product": {
+    "name": "Blue Top",
+    "quantity": "1",
+    "price": "Rs. 500"
+  },
+  "valid_credentials": {
+    "email": "daniil_bariev@example.com",
+    "password": "daniil123"
+  },
+  "order_data": {
+    "name": "Daniil",
+    "email": "daniil_bariev@example.com",
+    "password": "daniil123",
+    "first_name": "Daniil",
+    "last_name": "Bariev",
+    "company": "Test Company",
+    "address": "123 Test Street",
+    "address2": "Apt 4B",
+    "country": "United States",
+    "state": "California",
+    "city": "Los Angeles",
+    "zipcode": "90001",
+    "mobile_number": "1234567890"
+  },
+  "expected_success_message": "Order Placed!"
+}

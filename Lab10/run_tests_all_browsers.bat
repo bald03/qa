@@ -1,0 +1,21 @@
+@echo off
+REM Скрипт для запуска тестов во всех браузерах (Chrome и Firefox)
+REM Используется Selenium Grid с RemoteWebDriver
+
+echo ========================================
+echo Запуск тестов в Chrome
+echo ========================================
+pytest tests/ -v --browser=chrome
+
+echo.
+echo ========================================
+echo Запуск тестов в Firefox
+echo ========================================
+pytest tests/ -v --browser=firefox
+
+echo.
+echo ========================================
+echo Все тесты завершены!
+echo ========================================
+pause
+

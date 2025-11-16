@@ -1,0 +1,17 @@
+{
+  "url": "https://automationexercise.com/",
+  "valid_credentials": {
+    "email": "daniil_bariev@example.com",
+    "password": "daniil123"
+  },
+  "invalid_credentials": {
+    "email": "invalid@example.com",
+    "password": "wrongpass"
+  },
+  "empty_credentials": {
+    "email": "",
+    "password": ""
+  },
+  "expected_success_message": "Logged in as",
+  "expected_error_message": "Your email or password is incorrect!"
+}

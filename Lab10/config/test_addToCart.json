@@ -1,0 +1,14 @@
+{
+  "url": "https://automationexercise.com/",
+  "first_product": {
+    "name": "Blue Top",
+    "quantity": "1",
+    "price": "Rs. 500"
+  },
+  "second_product": {
+    "name": "Men Tshirt",
+    "quantity": "2",
+    "price": "Rs. 400"
+  },
+  "expected_cart_message": "Your product has been added to cart."
+}

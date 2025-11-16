@@ -1,0 +1,84 @@
+{
+  "test_data": {
+    "correctProduct": {
+      "id": "6789",
+      "category_id": "12",
+      "title": "Test watch",
+      "alias": "test-watch",
+      "content": "Some Content",
+      "price": "123",
+      "old_price": "100",
+      "status": "0",
+      "keywords": "Some Keywords",
+      "description": "Some description",
+      "hit": "1"
+    },
+    "incorrectProduct_negativePrice": {
+      "id": "6789",
+      "category_id": "12",
+      "title": "Test watch-with-negative-price",
+      "alias": "test-watch-with-negative-price",
+      "content": "Some Content",
+      "price": "-123",
+      "old_price": "100",
+      "status": "0",
+      "keywords": "Some Keywords",
+      "description": "Some description",
+      "hit": "1"
+    },
+    "incorrectProduct_invalidHitAndStatus": {
+      "id": "6789",
+      "category_id": "12",
+      "title": "Test watch with invalid parameters",
+      "alias": "test-watch-with-invalid-parameters",
+      "content": "Some Content",
+      "price": "123",
+      "old_price": "100",
+      "status": "2",
+      "keywords": "Some Keywords",
+      "description": "Some description",
+      "hit": "2"
+    },
+    "incorrectProduct_status15": {
+      "id": "6789",
+      "category_id": "15",
+      "title": "Test watch with status 15",
+      "alias": "test-watch-with-status-15",
+      "content": "Some Content",
+      "price": "123",
+      "old_price": "100",
+      "status": "2",
+      "keywords": "Some Keywords",
+      "description": "Some description",
+      "hit": "2"
+    },
+    "incorrectProduct_emptyProduct": {
+    },
+    "correctProductEdited": {
+      "id": "6789",
+      "category_id": "10",
+      "title": "Test watch edited",
+      "alias": "test-watch-edited",
+      "content": "Some Content edited",
+      "price": "234",
+      "old_price": "100",
+      "status": "1",
+      "keywords": "Some Keywords edited",
+      "description": "Some description edited",
+      "hit": "0"
+    },
+    "invalidProductEdited": {
+      "id": "6789",
+      "category_id": "10",
+      "title": "Test watch edited",
+      "alias": "test-watch-edited",
+      "content": "Some Content edited",
+      "price": "abc",
+      "old_price": "100",
+      "status": "1",
+      "keywords": "Some Keywords edited",
+      "description": "Some description edited",
+      "hit": "0"
+    }
+  }
+}

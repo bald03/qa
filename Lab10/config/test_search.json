@@ -1,0 +1,7 @@
+{
+  "url": "https://automationexercise.com/",
+  "valid_query": "top",
+  "empty_query": "",
+  "expected_search_results_title": "SEARCHED PRODUCTS",
+  "expected_empty_search_title": "ALL PRODUCTS"
+}

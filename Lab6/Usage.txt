@@ -1,0 +1,10 @@
+coverage run -m unittest test_bank_account.py -v 
+coverage report -m 
+
+
+coverage run -m unittest test_bank_account.py -v 
+
+
+python -m unittest test_bank_account.TestBankAccount.test_deposit_with_mocked_datetime test_bank_account.TestBankAccount.test_export_transactions_with_mocked_json test_bank_account.TestBankAccount.test_transfer_with_mocked_account test_bank_account.TestBankAccount.test_withdraw_with_mocked_transaction_logging test_bank_account.TestBankAccount.test_get_balance_statement_with_mocked_last_transaction test_bank_account.TestBankAccount.test_demo_functionality_with_mocked_print -v
+
+coverage report -m --include="bank_account.py"  

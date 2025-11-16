@@ -1,0 +1,251 @@
+{
+  "port": 4545,
+  "protocol": "http",
+  "name": "Currency Mock",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "USD",
+              "to": "EUR"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "USD",
+              "to": "EUR",
+              "rate": 0.91
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "EUR",
+              "to": "USD"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "EUR",
+              "to": "USD",
+              "rate": 1.10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "EUR",
+              "to": "RUB"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "EUR",
+              "to": "RUB",
+              "rate": 95.04
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "USD",
+              "to": "RUB"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "USD",
+              "to": "RUB",
+              "rate": 86.17
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "RUB",
+              "to": "USD"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "RUB",
+              "to": "USD",
+              "rate": 0.012
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "RUB",
+              "to": "EUR"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "RUB",
+              "to": "EUR",
+              "rate": 0.01
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "EUR",
+              "to": "CHF"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "EUR",
+              "to": "CHF",
+              "rate": 0.93
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/rate",
+            "query": {
+              "from": "CHF",
+              "to": "EUR"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "from": "CHF",
+              "to": "EUR",
+              "rate": 1.08
+            }
+          }
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 404,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "Currency not supported" }
+          }
+        }
+      ]
+    }
+  ]
+}
+
